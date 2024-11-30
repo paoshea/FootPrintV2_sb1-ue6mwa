@@ -1,0 +1,74 @@
+/* Android-specific styles */
+:root {
+  --android-ripple-color: rgba(0, 0, 0, 0.1);
+  --android-active-overlay: rgba(0, 0, 0, 0.05);
+  --android-status-bar-height: 24px;
+  --android-navigation-bar-height: 48px;
+}
+
+/* Material Design touch feedback */
+.android-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.android-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--android-ripple-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.android-ripple:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 1;
+}
+
+/* Android status bar */
+.android-status-bar {
+  height: var(--android-status-bar-height);
+  background-color: var(--brand-primary-dark);
+}
+
+/* Android navigation bar */
+.android-navigation-bar {
+  height: var(--android-navigation-bar-height);
+  background-color: var(--neutral-900);
+}
+
+/* Android-specific touch targets */
+@media (pointer: coarse) {
+  .android-touch-target {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px;
+  }
+}
+
+/* Android scrolling behavior */
+.android-scroll {
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior: contain;
+}
+
+/* Android-specific animations */
+@keyframes android-press {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+  }
+}
+
+.android-pressable:active {
+  animation: android-press 200ms ease-out forwards;
+}
